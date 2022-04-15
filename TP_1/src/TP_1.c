@@ -28,14 +28,13 @@ int main(void) {
     do{
         system("cls");
         printf("\t*******************\tMenu de opciones\t*******************\n\n");
-        flag<1 ? printf("\t    1. Ingresar Kilómetros: ( km=x)\n") : printf("\t    1. Ingresar Kilómetros ( km= %.2f )\n", kilometros);
-        flag<2 ? printf("\t    2. Ingresar Precio de Vuelos: (Aerolíneas=y, Latam=z)\n") : printf("\t    2. Ingresar Precio de Vuelos: ( Aerolíneas=%.2f, Latam=%.2f )\n", totalAerolineas,totalLatam);
-        printf("\t    3. Calcular todos los costos: \n\t\ta) Tarjeta de débito ( descuento 10 ) \n\t\tb) Tarjeta de crédito ( interés 25 ) \n\t\tc) Bitcoin ( 1BTC -> 4606954.55 Pesos Argentinos ) \n\t\td) Mostrar precio por km ( precio unitario ) \n\t\te) Mostrar diferencia de precio ingresada ( Latam - Aerolíneas ) \n");
+        flag<1 ? printf("\t    1. Ingresar Kilometros: ( km=x)\n") : printf("\t    1. Ingresar Kilometros ( km= %.2f )\n", kilometros);
+        flag<2 ? printf("\t    2. Ingresar Precio de Vuelos: (Aerolineas=y, Latam=z)\n") : printf("\t    2. Ingresar Precio de Vuelos: ( Aerolineas=%.2f, Latam=%.2f )\n", totalAerolineas,totalLatam);
+        printf("\t    3. Calcular todos los costos: \n\t\ta) Tarjeta de debito ( descuento 10 ) \n\t\tb) Tarjeta de credito ( interes 25 ) \n\t\tc) Bitcoin ( 1BTC -> 4606954.55 Pesos Argentinos ) \n\t\td) Mostrar precio por km ( precio unitario ) \n\t\te) Mostrar diferencia de precio ingresada ( Latam - Aerolineas ) \n");
         printf("\t    4. Informar resultados\n");
         printf("\t    5. Carga forzada de datos\n");
         printf("\t    6. Salir\n\n");
         printf("\t*******************************************************************\n\n");
-
         printf("\n    Ingrese opcion: ");
         fflush(stdin);
         scanf("%d", &opcion);
@@ -43,10 +42,10 @@ int main(void) {
         switch(opcion){
         case 1:
         	system("cls");
-            printf("\n\n\tIngresar Kilómetros: \t");
+            printf("\n\n\tIngresar Kilometros: \t");
             scanf("%f", &kilometros);
             while(kilometros<1){
-                printf("\n\n\tDebe ingresar un valor mayor a 0. Ingresar Kilómetros: \t");
+                printf("\n\n\tDebe ingresar un valor mayor a 0. Ingresar Kilometros: \t");
                 scanf("%f", &kilometros);
             }
             flag=1;
@@ -54,7 +53,7 @@ int main(void) {
         case 2:
             if(flag!=1)
             {
-                printf("\n\n\tPrimero ingrese los kilómetros\n\n");
+                printf("\n\n\tPrimero ingrese los kilometros\n\n");
                 continuar();
             }
             else

@@ -35,14 +35,14 @@ void mostrar(float totalAerolineas, float totalLatam, float kilometros){
     printf("\t\t-----KMs Ingresados: %.2f km-----\n\n", kilometros);
     printf("\t\t\t-----AEROLINEAS-----\n\n");
     printf("\t\tPrecio de aerolineas: $ %.2f\n", totalAerolineas);
-    printf("\t\ta) Precio con tarjeta de débito: $ %.2f\n", aeroDeb);
-    printf("\t\tb) Precio con tarjeta de crédito: $ %.2f\n", aeroCred);
+    printf("\t\ta) Precio con tarjeta de debito: $ %.2f\n", aeroDeb);
+    printf("\t\tb) Precio con tarjeta de credito: $ %.2f\n", aeroCred);
     printf("\t\tc) Precio pagando con bitcoin: %.6f BTC\n", aeroBTC);
     printf("\t\td) Mostrar precio unitario: $ %.2f\n", resultadoUnitAero);
     printf("\n\t\t\t-----LATAM-----\n\n");
     printf("\t\tPrecio de Latam: %.2f\n", totalLatam);
-    printf("\t\ta) Precio con tarjeta de débito: $ %.2f\n", latamDeb);
-    printf("\t\tb) Precio con tarjeta de crédito: $ %.2f\n", latamCred);
+    printf("\t\ta) Precio con tarjeta de debito: $ %.2f\n", latamDeb);
+    printf("\t\tb) Precio con tarjeta de credito: $ %.2f\n", latamCred);
     printf("\t\tc) Precio pagando con bitcoin: %.6f BTC\n", latamBTC);
     printf("\t\td) Mostrar precio unitario: $ %.2f\n", resultadoUnitLatam);
     printf("\n\t\t\t------------------\n\n");
@@ -65,7 +65,7 @@ void cargaForzada(){
 
 void continuar(){
 
-    printf("Presiona Enter para regresar al menú principal...");
+    printf("Presiona Enter para regresar al menu principal...");
     getchar();
     while(getchar()!='\n');
 }
