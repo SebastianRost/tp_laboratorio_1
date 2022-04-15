@@ -12,25 +12,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "calculos.h"
+#include "visualizar.h"
 
 int main(void) {
 
-	int flagKilometros = 1;
-	int flagPrecios = 1;
+	int flag = 0;
     int opcion;
-    int flagCalculo=1;
     float kilometros;
     float totalAerolineas;
     float totalLatam;
-    float aeroDeb;
-    float aeroCred;
-    float aeroBTC;
-    float latamDeb;
-    float latamCred;
-    float latamBTC;
-    float resultadoUnitAero;
-    float resultadoUnitLatam;
-    float diferencia;
     char seguir= 's';
     char siNo;
 
@@ -38,8 +28,8 @@ int main(void) {
     do{
         system("cls");
         printf("\t*******************\tMenu de opciones\t*******************\n\n");
-        flagKilometros ? printf("\t    1. Ingresar Kilómetros: ( km=x)\n") : printf("\t    1. Ingresar el primer operando (A= %.2f)\n", kilometros);
-        flagPrecios ? printf("\t    2. Ingresar Precio de Vuelos: (Aerolíneas=y, Latam=z)\n") : printf("\t    2. Ingresar Precio de Vuelos: (Aerolíneas=%.2f, Latam=%.2f)\n", totalAerolineas,totalLatam);
+        flag<1 ? printf("\t    1. Ingresar Kilómetros: ( km=x)\n") : printf("\t    1. Ingresar Kilómetros ( km= %.2f )\n", kilometros);
+        flag<2 ? printf("\t    2. Ingresar Precio de Vuelos: (Aerolíneas=y, Latam=z)\n") : printf("\t    2. Ingresar Precio de Vuelos: ( Aerolíneas=%.2f, Latam=%.2f )\n", totalAerolineas,totalLatam);
         printf("\t    3. Calcular todos los costos: \n\t\ta) Tarjeta de débito ( descuento 10 ) \n\t\tb) Tarjeta de crédito ( interés 25 ) \n\t\tc) Bitcoin ( 1BTC -> 4606954.55 Pesos Argentinos ) \n\t\td) Mostrar precio por km ( precio unitario ) \n\t\te) Mostrar diferencia de precio ingresada ( Latam - Aerolíneas ) \n");
         printf("\t    4. Informar resultados\n");
         printf("\t    5. Carga forzada de datos\n");
@@ -59,78 +49,59 @@ int main(void) {
                 printf("\n\n\tDebe ingresar un valor mayor a 0. Ingresar Kilómetros: \t");
                 scanf("%f", &kilometros);
             }
-            flagKilometros=0;
-            flagCalculo=1;
+            flag=1;
             break;
-
         case 2:
-            if(flagKilometros)
+            if(flag!=1)
             {
-                printf("\n\n\tPrimero ingrese el primer operando\n\n");
-                printf("Press Enter para continuar...");
-                getchar();
-                while(getchar()!='\n');
+                printf("\n\n\tPrimero ingrese los kilómetros\n\n");
+                continuar();
             }
             else
             {
                 system("cls");
-                printf("\n\n\tIngresar precio de vuelo de Aerolineas: \t");
+                printf("\n\n\t-Ingresar precio de vuelo de Aerolineas: \t");
                 scanf("%f", &totalAerolineas);
                 while(totalAerolineas<1){
                     printf("\n\n\tDebe ingresar un valor mayor a 0. Ingresar precio de vuelo de Aerolineas: \t");
                     scanf("%f", &totalAerolineas);
                 }
-                printf("\n\n\tIngresar precio de vuelo de Latam: \t");
+                printf("\n\n\t-Ingresar precio de vuelo de Latam: \t");
                 scanf("%f", &totalLatam);
                 while(totalLatam<1){
                     printf("\n\n\tDebe ingresar un valor mayor a 0. Ingresar precio de vuelo de Latam: \t");
                     scanf("%f", &totalLatam);
                 }
-                flagPrecios=0;
-                flagCalculo=1;
+                flag++;
             }
 
             break;
         case 3:
-            if(flagPrecios)
+            if(flag!=2)
             {
-                printf("\n\n\tNo se puede realizar la opcion sin ingresar los kilometrosy los precios, ingreselos y vuelva a intentar\n\n");
-
-                printf("Presiona Enter para continuar...");
-                getchar();
-                while(getchar()!='\n');
+                printf("\n\n\tNo se puede realizar la opcion sin ingresar los kilometros y los precios, ingreselos y vuelva a intentar\n\n");
+                continuar();
             }
             else
             {
                 system("cls");
-                aeroDeb = calcularDeb(totalAerolineas);
-                aeroCred = calcularCred(totalAerolineas);
-                aeroBTC = calcularBTC(totalAerolineas);
-                latamDeb = calcularDeb(totalLatam);
-                latamCred = calcularCred(totalLatam);
-                latamBTC = calcularBTC(totalLatam);
-                resultadoUnitAero = calcularUnit(kilometros, totalAerolineas);
-                resultadoUnitLatam = calcularUnit(kilometros, totalLatam);
-                diferencia = calcularDiferencia(totalAerolineas, totalLatam);
-
+                calculos(totalAerolineas, totalLatam, kilometros);
                 printf("\n\n\tSe ha realizado el calculo de las operaciones\t\n\n");
-                flagCalculo=0;
-                printf("Presiona Enter para continuar...");
-                getchar();
-                while(getchar()!='\n');
+                flag++;
+                continuar();
             }
             break;
         case 4:
-            flagCalculo ? printf("\n\n\tNo se pueden mostrar los resultados sin realizar el calculo con anterioridad\n\n") :
-            mostrar(totalAerolineas, totalLatam,kilometros,aeroDeb,aeroCred,aeroBTC,latamDeb,latamCred,latamBTC,resultadoUnitAero,resultadoUnitLatam,diferencia);
-            printf("Press Enter para continuar...");
-            getchar();
-            while(getchar()!='\n');
+            flag!=3 ? printf("\n\n\tNo se pueden mostrar los resultados sin ingresar los datos o realizar el calculo con anterioridad\n\n") :
+            mostrar(totalAerolineas, totalLatam,kilometros);
+            continuar();
             break;
-
-
+        case 5:
+        	cargaForzada();
+            continuar();
+            flag=0;
+        	break;
         case 6:
-
             system("cls");
             fflush(stdin);
             printf("\n\n\tRealmente desea salir? (s / n)\n\n");
@@ -142,9 +113,7 @@ int main(void) {
         default:
 
             printf("\n\n\tno es una opcion valida\n\n");
-            printf("Press Enter para continuar...");
-            getchar();
-            while(getchar()!='\n');
+            continuar();
 
             break;
 
