@@ -5,6 +5,8 @@
  *      Author: Sebastián
  */
 
+#include "visualizar.h"
+
 float calcularDeb(float total){
 	return total*0.9;
 }

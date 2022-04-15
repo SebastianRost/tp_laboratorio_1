@@ -5,6 +5,8 @@
  *      Author: Sebastián
  */
 
+#include "calculos.h"
+
 void mostrar(float totalAerolineas, float totalLatam, float kilometros){
 
     float aeroDeb;
