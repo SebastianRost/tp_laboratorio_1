@@ -511,6 +511,7 @@ void menu(){
 				  //InicializarPasajeros(listaPasajeros);
 			system ("cls");
 				  cantidadDatos = validarAlta(listaPasajeros,CANT,cantidadDatos);
+				break;
 			case 2:
 				if( cantidadDatos > 0 )
 				{
