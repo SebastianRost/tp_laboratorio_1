@@ -1,8 +1,8 @@
 /*
  * validations.h
  *
- *  Created on: 7 may. 2022
- *      Author: Sebastián
+ *  Created on: 19 may. 2022
+ *      Author: Rost Sebastián
  */
 
 #ifndef VALIDATIONS_H_

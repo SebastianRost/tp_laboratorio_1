@@ -1,8 +1,8 @@
 /*
  * validations.c
  *
- *  Created on: 7 may. 2022
- *      Author: Sebastián
+ *  Created on: 19 may. 2022
+ *      Author: Rost Sebastian
  */
 #include "validations.h"
 #include "ArrayPassenger.h"
