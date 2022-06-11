@@ -119,7 +119,7 @@ int submenuCriterio()
     printf("5. Ordenar por codigo de vuelo.\n");
     printf("6. Ordenar por estado de vuelo.\n");
     printf("7. Ordenar por tipo de pasajero.\n\n");
-    opcion=getOption(1,3);
+    opcion=getOption(1,7);
     return opcion;
 }
 
