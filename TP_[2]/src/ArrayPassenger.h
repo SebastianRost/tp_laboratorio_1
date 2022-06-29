@@ -33,7 +33,7 @@ typedef struct
 	int id;
 	char name[51];
 	char lastname[51];
-	int price;
+	float price;
 	char flyCode[10];
 	int idTypePassenger;
 	int statusFlight;
@@ -95,7 +95,7 @@ void printPassengers(ePassenger listaPasajeros[], int length);
 /// @brief hardcodeo de la lista
 ///
 /// @param lista lista a hardcodear
-void InicializarPasajeros(ePassenger lista[]);
+int InicializarPasajeros(ePassenger lista[],int cantidadDatos);
 
 void opcionesMenu();
 
@@ -202,7 +202,7 @@ void mostrarPorTipo(ePassenger list[], int len,int type);
 /// @param list variable a recorrer
 /// @param tam posiciones a recorrer
 /// @return acumulador de importes
-int totalImportes (ePassenger list[], int tam);
+float totalImportes (ePassenger list[], int tam);
 
 /// @fn int calcularPromedio(float, int)
 /// @brief calcula el promedio de lo ingresado
@@ -210,7 +210,7 @@ int totalImportes (ePassenger list[], int tam);
 /// @param total impote total
 /// @param cantidad el divisor, cantidad por la cual dividir
 /// @return promedio
-int calcularPromedio (float total, int cantidad);
+float calcularPromedio (float total, int cantidad);
 
 /// @fn int contadorMayores(ePassenger[], int, int)
 /// @brief cantidad de mayores al promedio
@@ -219,7 +219,7 @@ int calcularPromedio (float total, int cantidad);
 /// @param promedio valor promedio
 /// @param tam posiciones a recorer
 /// @return cantidad de mayores
-int contadorMayores (ePassenger list[], int promedio, int tam);
+int contadorMayores (ePassenger list[], float promedio, int tam);
 
 /// @fn void totalYPromedio(ePassenger[], int, int)
 /// @brief muestra por pantalla el total y el promedio de precios

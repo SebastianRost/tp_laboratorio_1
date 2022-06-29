@@ -42,7 +42,7 @@ void InicializarEstadoVuelo(eStatusFlight lista[])
     }
 }
 
-void InicializarPasajeros(ePassenger lista[])
+int InicializarPasajeros(ePassenger lista[],int cantidadDatos)
 {
 	ePassenger carga[]={
                         {1,"Pepe","Argento",10,"latam",2,1,OCUPADO},
@@ -56,6 +56,7 @@ void InicializarPasajeros(ePassenger lista[])
     {
         lista[i] = carga[i];
     }
+    return cantidadDatos+5;
 }
 
 int initPassengers (ePassenger listaPasajeros[], int tam)
@@ -121,16 +122,28 @@ int rtn = -1;
 ePassenger PedirDatosPasajero( void )
 {
 	ePassenger unPasajero;
+	char nombre[51];
+	char apellido[51];
+	int validarPrecio = 0;
+	float precio = 0;
 
 	printf("Ingrese el nombre del pasajero: ");
 	fflush(stdin);
-	scanf("%[^\n]", unPasajero.name);
+	gets(nombre);
+	validarPalabra(nombre);
+	strcpy(unPasajero.name, nombre);
+
 
 	printf("Ingrese el apellido del pasajero: ");
 	fflush(stdin);
-	scanf("%[^\n]", unPasajero.lastname);
+	gets(apellido);
+	validarPalabra(apellido);
+	strcpy(unPasajero.lastname, apellido);
 
-	unPasajero.price = pedirEntero("Ingrese precio de vuelo: ",1,500000);
+	printf("Ingrese precio: ");
+	validarPrecio = scanf("%f", &precio);
+	validarFloat(validarPrecio, &precio);
+	unPasajero.price = precio;
 
 	printf("Ingrese codigo de vuelo: ");
 	fflush(stdin);
@@ -147,9 +160,10 @@ ePassenger PedirDatosPasajero( void )
 
 void printPassenger(ePassenger unPasajero)
 {
-	printf("%2d\t%4s\t%10s\t%d \t%8s\t%2d\n",unPasajero.id,
+	printf("%2d\t%4s\t%10s\t%.2f%8d \t%10s\t%2d\n",unPasajero.id,
 									   unPasajero.name,
 			                           unPasajero.lastname,
+			                           unPasajero.price,
 									   unPasajero.idTypePassenger,
 									   unPasajero.flyCode,
 									   unPasajero.statusFlight
@@ -158,7 +172,7 @@ void printPassenger(ePassenger unPasajero)
 
 void printPassengers(ePassenger listaPasajeros[], int length){
 
-	printf("\n ID  |  Nombre  |  Apellido  |  Tipo  |  Codigo  |  Estado  \n");
+	printf("\n ID  |  Nombre  |  Apellido  |  Precio  |  Tipo  |  Codigo  |  Estado  \n");
 	printf("_________________________________________________________________________\n");
 	for(int i=0; i<length; i++ )
 	{
@@ -174,7 +188,8 @@ void opcionesMenu(){
 	printf("\n2. Modificar");
 	printf("\n3. Baja");
 	printf("\n4. Listar");
-	printf("\n5. Salir");
+	printf("\n5. Carga forzada");
+	printf("\n6. Salir");
 }
 
 void
@@ -183,6 +198,10 @@ modificacion (ePassenger listapasajeros[], int tam)
   int opcionModificar;
   int id;
   char seguir='s';
+	char nombre[51];
+	char apellido[51];
+	int validarPrecio = 0;
+	float precio = 0;
   printPassengers(listapasajeros,tam);
   id = pedirEntero("Id de pasajero a modificar:",1,2000);
   id = findPassengerById(listapasajeros,tam,id);
@@ -203,16 +222,24 @@ modificacion (ePassenger listapasajeros[], int tam)
 		      switch (opcionModificar)
 			{
 			case 1:
-			  printf ("1. Nombre: ");
-			  fflush (stdin);
-			  scanf ("%s", listapasajeros[i].name);
+				printf("Ingrese el nombre del pasajero: ");
+				fflush(stdin);
+				gets(nombre);
+				validarPalabra(nombre);
+				strcpy(listapasajeros[i].name, nombre);
 			  break;
 			case 2:
-			  printf ("2. Apellido: ");
-			  scanf ("%s", listapasajeros[i].lastname);
+				printf("Ingrese el nombre del pasajero: ");
+				fflush(stdin);
+				gets(apellido);
+				validarPalabra(apellido);
+				strcpy(listapasajeros[i].lastname, apellido);
 			  break;
 			case 3:
-			  listapasajeros[i].price = pedirEntero("3. Precio: ",1,200000);
+				printf("\nIngrese precio: ");
+				validarPrecio = scanf("%f", &precio);
+				validarFloat(validarPrecio, &precio);
+				listapasajeros[i].price = precio;
 			  break;
 			case 4:
 			  printf ("4. Codigo de vuelo: ");
@@ -298,7 +325,7 @@ int baja(ePassenger listapasajeros[], int len,int cantidadDatos){
 
 void mostrarPorEstadoDeVuelo(ePassenger list[], int len, int fligthState){
 
-	printf("\n ID  |  Nombre  |  Apellido  |  Tipo  |  Codigo  |  Estado  \n");
+	printf("\n ID  |  Nombre  |  Apellido  |  Precio  |  Tipo  |  Codigo  |  Estado  \n");
 	for(int i = 0 ; i<len ; i++){
 		if(list[i].statusFlight==fligthState && list[i].isEmpty == OCUPADO){
 			printPassenger(list[i]);
@@ -324,8 +351,8 @@ void sortByCode(ePassenger list[], int len, int order){
 				}
 
 			}
+		}
 	}
-}
 }
 
 int sortPassengersByCode(ePassenger list[], int len, int order,int fligthState){
@@ -379,7 +406,7 @@ list[j].statusFlight=auxNumerico;
 
 void mostrarPorTipo(ePassenger list[], int len,int type){
 
-	printf("\n ID  |  Nombre  |  Apellido  |  Tipo  |  Codigo  |  Estado  \n");
+	printf("\n ID  |  Nombre  |  Apellido  |  Precio  |  Tipo  |  Codigo  |  Estado  \n");
 	printf("_________________________________________________________________________\n");
 	for(int i = 0 ; i<len ; i++){
 		if(list[i].idTypePassenger==type && list[i].isEmpty==OCUPADO){
@@ -407,9 +434,9 @@ int sortPassengers(ePassenger list[], int len, int order){
 	return rtn;
 }
 
-int totalImportes (ePassenger list[], int tam)
+float totalImportes (ePassenger list[], int tam)
 {
-  int acumImportes = 0;
+  float acumImportes = 0;
   for (int i = 0; i < tam; i++)
     {
       if (list[i].isEmpty == OCUPADO)
@@ -420,14 +447,14 @@ int totalImportes (ePassenger list[], int tam)
   return acumImportes;
 }
 
-int
+float
 calcularPromedio (float total, int cantidad)
 {
   return (float)(total / cantidad);
 }
 
 int
-contadorMayores (ePassenger list[], int promedio, int tam)
+contadorMayores (ePassenger list[], float promedio, int tam)
 {
   int contadorImportesMayores = 0;
   for (int i = 0; i < tam; i++)
@@ -505,7 +532,7 @@ void menu(){
 		fflush (stdin);
         system("cls");
 		opcionesMenu();
-		opcion = pedirEntero("\nOpcion: ",1,5);
+		opcion = pedirEntero("\nOpcion: ",1,6);
 		switch(opcion){
 			case 1:
 				  //InicializarPasajeros(listaPasajeros);
@@ -552,6 +579,16 @@ void menu(){
 				}
 			break;
 			case 5:
+				cantidadDatos = InicializarPasajeros(listaPasajeros,cantidadDatos);
+				if(cantidadDatos>0){
+					printf("\nSe realizo la carga forzada\n");
+					continuar();
+				}else{
+					printf("\nNo se pudo realizar la carga forzada\n");
+					continuar();
+				}
+			break;
+			case 6:
 		        system("cls");
 				seguir = salir(seguir);
 				break;
